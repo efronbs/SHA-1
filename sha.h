@@ -10,7 +10,7 @@ void printBytes(char *buf, int bytes, int bytesPerLine);
 unsigned int setupBuffer(char **buf);
 void padBuffer(char *buf, int msg_len, int full_length);
 char *initHash();
-char *runHashRound(char *hash, char *msg);
+void runHashRound(char *hash, char *msg);
 void packWSet(char *msg, char **w_set);
 char *xorCharArray(char arr1[4], char arr2[4]);
 void circularShift(char *w_current);

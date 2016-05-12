@@ -7,7 +7,7 @@
 	It takes the initialized hash values and the padded message buffer
 	It sets the buffer that stores the initial hash to the resultant hash 
 */
-char *runHashRound(char *hash, char *msg)
+void runHashRound(char *hash, char *msg)
 {
         int i;
         char **w_set;
