@@ -1,0 +1,4 @@
+This is a SHA-1 implementation 
+
+to compile type 'make'
+the executable is named 'sha'.
