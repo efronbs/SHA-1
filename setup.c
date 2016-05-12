@@ -2,6 +2,9 @@
 
 #define uint unsigned int
 
+/**
+*	Takes the buffer holding the raw input string, truncates it to the correct size, and pads it. It returns the full size of the buffer on success
+*/
 unsigned int setupBuffer(char **buf)
 {
 	//first find the size of the last section. if there is less than 8 open bytes, resize 
@@ -24,12 +27,14 @@ unsigned int setupBuffer(char **buf)
 	padBuffer(*buf, msg_len, full_size);
 	free(new_buf);
 
-//	printf("message length: %d\n", msg_len);
-//	printf("padded length: %d\n", full_size);
-//	printBytes(*buf, full_size, 4);
 	return full_size;	
 }
 
+/**
+*	Pads the buffer.
+*	Takes the truncated buffer, the message size, and the buffer size. Based on this input sets the last 4 bytes as the amount of bits the message is,
+*	sets the first byte after the message to 0b10000000, and the fills in the rest of the padding bytes with 0
+*/
 void padBuffer(char *buf, int msg_len, int full_length)
 {
 	int i;
@@ -50,6 +55,9 @@ void padBuffer(char *buf, int msg_len, int full_length)
 	}
 }
 
+/**
+*	initializes the hash to its initial value
+*/
 char *initHash() {
         char *hash = (char *) malloc(20);
         hash[0]=0x67; hash[1]=0x45; hash[2]=0x23; hash[3]=0x01; hash[4]=0xEF; hash[5]=0xCD; hash[6]=0xAB; hash[7]=0x89; hash[8]=0x98;

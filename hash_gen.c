@@ -2,6 +2,11 @@
 
 #define uint unsigned int
 
+/**
+	This is the main driver for running the hash rounds. 
+	It takes the initialized hash values and the padded message buffer
+	It sets the buffer that stores the initial hash to the resultant hash 
+*/
 char *runHashRound(char *hash, char *msg)
 {
         int i;
@@ -32,6 +37,10 @@ char *runHashRound(char *hash, char *msg)
         free(A); free(B); free(C); free(D); free(E);
 }
 
+/**	
+	Generates W0..W89. The padded message and a buffer to hold the W values is passed in.
+	This runs the algorithm to generate each W value and stores it in its associated buffer 		
+*/
 void packWSet(char *msg, char **w_set)
 {
         int i;
@@ -66,6 +75,10 @@ void packWSet(char *msg, char **w_set)
         }
 }
 
+/**
+*	Runs the compression algorith on the initialized hash. Stores the results int the A, B, C, D, E
+*	 
+*/
 void runCompression(char *A, char *B, char *C, char *D, char *E, uint intA, uint intB, uint intC, uint intD, uint intE, char **w_set, char *hash)
 {       
         int T, intW, t = 0; 
@@ -93,6 +106,9 @@ void runCompression(char *A, char *B, char *C, char *D, char *E, uint intA, uint
         intToCharArray(E, intE);
 }
 
+/**
+*	Generates the new value for A and stores it in unsigned int T.
+*/
 uint genT(uint intA, uint intB, uint intC, uint intD, uint intE, uint intW, int t)
 {
         uint T;
@@ -114,6 +130,9 @@ uint genT(uint intA, uint intB, uint intC, uint intD, uint intE, uint intW, int 
 
 }
 
+/**
+*	Performs the F of T function that I don't know the name of that is part of generating T.
+*/
 uint FofT(uint B, uint C, uint D, int t)
 {
         uint finalVal;

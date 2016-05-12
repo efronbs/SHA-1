@@ -2,6 +2,12 @@
 
 #define uint unsigned int
 
+/**
+*	takes in a buffer, the size of the buffer, and how many bytes to print per line
+*	the goes through the buffer for the passed in size and prints the bytes in hex.
+*	this is mostly a debugging tool.
+*/
+
 void printBytes(char *buf, int bytes, int bytesPerLine)
 {
         int i;
@@ -15,6 +21,10 @@ void printBytes(char *buf, int bytes, int bytesPerLine)
         printf("\n");
 }
 
+/**
+*	XORs two 4 byte char arrays, byte by byte
+*/
+
 char *xorCharArray(char arr1[4], char arr2[4])
 {
         char temp[4];
@@ -26,6 +36,15 @@ char *xorCharArray(char arr1[4], char arr2[4])
         memcpy(retVal, temp, 4);
         return retVal;
 }
+
+/*******************NOTE ON CIRCULAR SHIFTS****************************
+*	I wrote three different functions so I could write faster code than a general equation for shifting, as there are only
+*	3 different types of shifts being done its not a big deal.
+*/
+
+/**
+*	performs a circular shift by one of a 4 byte char array
+*/
 
 void circularShift(char *w_current)
 {
@@ -48,6 +67,10 @@ void circularShift(char *w_current)
         }
 }
 
+/**
+*	Does a circular left shift by 5 on an unsigned int
+*/
+
 uint circularShiftFive(uint val)
 {
         unsigned int lowFive = 0, finalVal = 0;
@@ -58,11 +81,18 @@ uint circularShiftFive(uint val)
         return finalVal;
 }
 
+/**
+*	Does a circular left shift by 30 on an unsigned int
+*/
+
 uint circularShiftThirty(uint val)
 {
         return (val >> 2) | (val << 30);
 }
 
+/**
+*	puts a 4 byte char array into a single unsigned int
+*/
 uint charArrayToInt(char *charArray)
 {
         int i, numForm = 0;
@@ -73,6 +103,9 @@ uint charArrayToInt(char *charArray)
         return numForm;
 }
 
+/**
+*	puts an unsigned int into a 4 byte char array
+*/
 void intToCharArray(char *finalArray, uint numForm)
 {
         int i;
@@ -82,6 +115,10 @@ void intToCharArray(char *finalArray, uint numForm)
                 finalArray[i] = (unsigned char) temp;
         }
 }
+
+/**
+*	performs an addition of two unsigned ints mod 2^32
+*/
 
 uint addMod(uint var1, uint var2)
 {
