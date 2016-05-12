@@ -4,6 +4,8 @@
 
 #define uint unsigned int
 
+extern uint K_0, K_1, K_2, K_3;
+
 void printBytes(char *buf, int bytes, int bytesPerLine);
 unsigned int setupBuffer(char **buf);
 void padBuffer(char *buf, int msg_len, int full_length);
